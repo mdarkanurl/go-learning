@@ -132,6 +132,23 @@ func describe(value interface{}) {
 	fmt.Println("Unknown type")
 }
 
+func switchUseCase(t switchUseCaseType) string {
+	switch t.from {
+	case "YouTube":
+		return fmt.Sprintf("This is from YouTube. You earn %v with %d views", t.earning, t.views)
+	case "Facebook":
+		return fmt.Sprintf("This is from Facebook. You earn %v with %d views", t.earning, t.views)
+	default:
+		return ""
+	}
+}
+
+type switchUseCaseType struct {
+	from string
+	views int
+	earning float64
+}
+
 func main() {
 	Teacher := teacher{
 		name:     "Ali",
@@ -180,4 +197,19 @@ func main() {
 	describe(3.14)
 	describe(true)
 	describe([]int{1, 2, 3})
+
+	SwitchUseCaseTypeForYouTube := switchUseCaseType{
+		from: "YouTube",
+		views: 5640,
+		earning: 65.06,
+	}
+
+	SwitchUseCaseTypeForFacebook := switchUseCaseType{
+		from: "Facebook",
+		views: 6021,
+		earning: 30.16,
+	}
+
+	fmt.Println(switchUseCase(SwitchUseCaseTypeForYouTube))
+	fmt.Println(switchUseCase(SwitchUseCaseTypeForFacebook))
 }
