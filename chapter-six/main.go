@@ -1,5 +1,8 @@
 package main
-import "fmt"
+import (
+	"fmt"
+	"errors"
+)
 
 func sendMessageToPeople(sendToTeachers, sendToStudents string) (int, error) {
 	constForTeacher, err := sendMessage(sendToTeachers)
@@ -37,6 +40,14 @@ func queryDatabase() error {
 	return dbError{statusCode: 500, message: "Too many connection"}
 }
 
+func getName(id, yearOfBirthday int) (string, error) {
+	if yearOfBirthday > 2007 {
+		return "", errors.New("You are not adult yet")
+	}
+
+	return "Arkan", nil
+}
+
 
 func main() {
 	fmt.Println(sendMessageToPeople("Hello this for teacher", "Hello this for student"))
@@ -44,5 +55,11 @@ func main() {
 	if err != nil {
 		fmt.Println("Error from DB connection")
 	}
+
+	name, err := getName(6081, 2007)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(name)
 }
 
