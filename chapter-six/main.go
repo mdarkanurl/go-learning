@@ -24,7 +24,25 @@ func sendMessage(message string) (int, error) {
 	return costPerChar * len(message), nil
 }
 
+type dbError struct {
+	statusCode int
+	message string
+}
+
+func (de dbError) Error() string {
+	return fmt.Sprintf("db error message %s (statusCode %d)", de.message, de.statusCode)
+}
+
+func queryDatabase() error {
+	return dbError{statusCode: 500, message: "Too many connection"}
+}
+
+
 func main() {
 	fmt.Println(sendMessageToPeople("Hello this for teacher", "Hello this for student"))
+	err := queryDatabase()
+	if err != nil {
+		fmt.Println("Error from DB connection")
+	}
 }
 
