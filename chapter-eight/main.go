@@ -2,6 +2,15 @@ package main
 
 import "fmt"
 
+func sum(nums ...int) int {
+	total := 0
+
+	for _, value := range nums {
+		total += value
+	}
+	return total
+}
+
 func main() {
 
 	// Declare an array of 5 integers
@@ -79,6 +88,35 @@ func main() {
 	// Indexed Initialization
 	indexed := [5]int{2: 100, 4: 400}
 	fmt.Println("Indexed init:", indexed)
+
+	ages := [5]int{18, 20, 17, 23, 77}
+	mySlice := ages[1:4]
+	fmt.Println(mySlice)
+
+	// create slice using make function
+	countrySlice := make([]string, 2, 5)
+	fmt.Println(countrySlice)
+
+	// Modify or insert data to existing slots
+	countrySlice[0] = "Bangladesh"
+	countrySlice[1] = "UAS"
+	fmt.Println(countrySlice)
+
+	// Append new slots
+	countrySlice = append(countrySlice, "India")
+	fmt.Println(countrySlice)
+
+	// copy a slice
+	cSlice := make([]string, len(countrySlice))
+	copy(cSlice, countrySlice)
+	fmt.Println("Copyed Slice:", cSlice)
+
+	// variadic feture in go
+	numbersForSum := []int{10, 11, 2}
+	fmt.Println(sum(numbersForSum...))
+
+	fmt.Println("Memory location of first item in numbersForSum:", &numbersForSum[0])
+	fmt.Println("Memory location of second item in numbersForSum:", &numbersForSum[1])
 }
 
 // printArray demonstrates passing arrays to functions
